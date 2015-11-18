@@ -54,6 +54,16 @@ describe('A different category', function () {
     
 });
 
+describe('Statics', function(){
+    beforeEach(function(done) {
+        Page.create({
+            title: 'foo',
+            content: 'bar',
+            tags: ['foo', 'bar']
+        }, done)
+    });
+});
+
 
 
 //future specs
