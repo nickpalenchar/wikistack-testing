@@ -7,6 +7,9 @@ var User = models.User;
 var path = require('path');
 var chalk = require('chalk');
 
+
+
+
 describe('Validation', function () {
     var page;
     beforeEach(function(){
@@ -35,7 +38,7 @@ describe('Validation', function () {
     });
     describe('Test Page Virtuals', function () {
     	xit('Expects /wiki/ to be preceding the urlTitle', function(done){
-            
+
         });
     	xit('Returns a 404 if an invalid path is given')
     });
@@ -51,10 +54,11 @@ describe('Validation', function () {
     })
 });
 describe('A different category', function () {
-    
+
 });
 
 describe('Statics', function(){
+
     beforeEach(function(done) {
         Page.create({
             title: 'foo',
@@ -62,6 +66,26 @@ describe('Statics', function(){
             tags: ['foo', 'bar']
         }, done)
     });
+      afterEach(function() {
+      	console.log('removing');
+      	Page.remove({title: 'foo'});
+  });
+
+	describe('FindByTag method', function () {
+		it('finds a page using the tag as a matching parameter', function () {
+			// console.log(chalk.magenta(displayTags(Page.findByTag('foo'))));
+				Page.findByTag('foo')
+				.then(function (data) {
+					expect(data[0].title).to.be.equal('foo');
+
+					done();
+				})
+			//.to.be.equal('foo')
+			// done();
+		})
+		xit('')
+	} )
+
 });
 
 
@@ -72,8 +96,11 @@ xdescribe('Find Similar Method', function () {
     xit('Returns id of matching pages')
     xit('Returns the tags of a particular page')
 })
-xdescribe('Find by Tag method', function () {
-    xit('Receives the correct tag input from user as parameter')
-    xit('Returns the pages from database that have matching tags')
-    xit('Does not return pages that do not have matching tags')
-})
+
+function displayTags(obj) {
+    var result = [];
+    for(var key in obj){
+        result.push(key)
+    }
+    return result;
+}
